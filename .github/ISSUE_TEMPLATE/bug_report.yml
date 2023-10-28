@@ -2,7 +2,6 @@ name: Bug Report
 description: FIle a bug report
 title: "[Bug]: <title>"
 labels: ["bug"]
-assignees: ''
 body:
   - type: input
     id: describe-bug
