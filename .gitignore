@@ -1,1 +1,26 @@
+# ===== KiCad =====
+# バックアップ・自動保存
+*-backups/
+_autosave-*
+*.bak
+*.bck
+*.kicad_pcb-bak
+*.kicad_sch-bak
+# ローカル設定・キャッシュ・ロック
+*.kicad_prl
+fp-info-cache
+*.lck
+# 作業中の出力 (承認済みの製造データは production/<rev>/ にコミットする)
+hardware/*/outputs/
 
+# ===== draw.io =====
+*.bkp
+*.dtmp
+
+# ===== ファームウェアのビルド成果物 (環境に合わせて追加) =====
+build/
+
+# ===== OS / エディタ =====
+.DS_Store
+Thumbs.db
+.vscode/
