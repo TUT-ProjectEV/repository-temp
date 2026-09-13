@@ -1,0 +1,72 @@
+name: デザインレビュー
+description: DR の準備・実施・記録
+title: "[DR][UNIT] "
+labels: ["type:dr"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        進め方は [デザインレビュー](https://github.com/TUT-ProjectEV/.github-private/blob/main/design-review.md) に従う。レビューの3日前までに起票し、入力成果物をレビュー可能な状態にする。
+        合格後、主査が `develop` → `main` の Pull request を作り、タグを付ける。
+  - type: input
+    id: dr-id
+    attributes:
+      label: DR ID
+      placeholder: "例: DR2-TBC-20260315"
+    validations:
+      required: true
+  - type: dropdown
+    id: gate
+    attributes:
+      label: ゲート
+      options:
+        - DR0 要件定義完了
+        - DR1 基本設計完了
+        - DR2 詳細設計完了
+        - DR3 回路図完成
+        - DR4 アートワーク完成 (発注可否)
+        - DR5 システムテスト完了 (走行可否)
+    validations:
+      required: true
+  - type: input
+    id: date
+    attributes:
+      label: 実施予定日時・場所
+    validations:
+      required: true
+  - type: textarea
+    id: members
+    attributes:
+      label: 参加者
+      value: |
+        - 主査:
+        - 説明者:
+        - レビュア (担当者以外。DR4 / DR5 は2名以上):
+        - 助言者 (ESA / OB / 教員):
+    validations:
+      required: true
+  - type: textarea
+    id: inputs
+    attributes:
+      label: 入力成果物
+      description: ファイルへのリンク、または Pull request
+    validations:
+      required: true
+  - type: checkboxes
+    id: prep
+    attributes:
+      label: 事前準備
+      options:
+        - label: 入力成果物がレビュー可能な状態にある
+        - label: 説明者がフェーズの完了条件を自己点検した
+        - label: レビュアに事前に成果物を共有した
+  - type: textarea
+    id: result
+    attributes:
+      label: 結果 (実施後に記入)
+      value: |
+        - 判定: 合格 / 条件付き合格 / 再審
+        - 議事録: docs/records/<車両コード>/reviews/<DR ID>.md
+        - 指摘 Issue:
+        - main への Pull request:
+        - タグ:

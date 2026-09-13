@@ -1,0 +1,61 @@
+name: 作業
+description: 要求・設計・実装・テストの作業項目
+title: "[UNIT] "
+labels: ["type:task"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        タイトルの `UNIT` をユニット略号に置き換える。作成後、`phase:` と `unit:` のラベルを付け、DR ゲートのマイルストーンに入れる。
+  - type: dropdown
+    id: phase
+    attributes:
+      label: フェーズ
+      options:
+        - 1 要件定義
+        - 2 基本設計
+        - 3 詳細設計
+        - 4 実装
+        - 5 単体テスト
+        - 6 結合テスト
+        - 7 システムテスト
+        - 8 受入テスト
+    validations:
+      required: true
+  - type: textarea
+    id: purpose
+    attributes:
+      label: 目的
+      description: 何のための作業か
+    validations:
+      required: true
+  - type: textarea
+    id: artifacts
+    attributes:
+      label: 作成・更新する成果物
+      description: 文書 ID、基板 ID、ファイルパスなど
+    validations:
+      required: true
+  - type: input
+    id: requirements
+    attributes:
+      label: 関連する要求 ID / インタフェース ID
+  - type: textarea
+    id: done
+    attributes:
+      label: 完了条件
+      description: 何ができたら close してよいか
+      value: |
+        - [ ] 
+    validations:
+      required: true
+  - type: dropdown
+    id: safety
+    attributes:
+      label: 安全への影響
+      description: 関わる場合は `safety:hv` ラベルを付ける
+      options:
+        - 関わらない
+        - TS・シャットダウン回路・BMS・IMD・BSPD・充電に関わる
+    validations:
+      required: true

@@ -1,0 +1,78 @@
+name: 設計変更要求 (ECR)
+description: 承認済み (DR 通過済み) の成果物を変更する
+title: "[ECR][UNIT] "
+labels: ["type:ecr"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        変更を止める仕組みではなく、**変更を関係者に伝え、再試験の要否を判断する**仕組み。
+        項目は [設計変更要求テンプレート](https://github.com/TUT-ProjectEV/.github-private/blob/main/templates/change-request.md) に対応する。承認後、`fix/<この Issue 番号>-<内容>` ブランチで修正する。
+  - type: input
+    id: ecr-id
+    attributes:
+      label: 変更要求 ID
+      placeholder: "例: ECR-003"
+    validations:
+      required: true
+  - type: textarea
+    id: target
+    attributes:
+      label: 対象の成果物と版数
+      description: 承認済みのタグへのリンク
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: 変更前 / 変更後
+    validations:
+      required: true
+  - type: textarea
+    id: reason
+    attributes:
+      label: 変更理由と発生源
+      description: 不具合の Issue 番号、テスト ID、DR 指摘、規則改訂 (条番号) など
+    validations:
+      required: true
+  - type: checkboxes
+    id: impact
+    attributes:
+      label: 影響範囲
+      options:
+        - label: 要求仕様
+        - label: インタフェース (相手ユニットの担当者の合意が必要)
+        - label: 回路図・基板 (再製作の要否を下に書く)
+        - label: ソフトウェア
+        - label: 筐体・搭載
+        - label: ハーネス
+        - label: 規則適合・車検・提出書類 (ESF など)
+        - label: コスト・スケジュール
+  - type: textarea
+    id: impact-detail
+    attributes:
+      label: 影響の詳細
+  - type: textarea
+    id: retest
+    attributes:
+      label: 再試験が必要なテスト ID
+    validations:
+      required: true
+  - type: dropdown
+    id: safety
+    attributes:
+      label: 安全への影響
+      options:
+        - 関わらない
+        - TS・シャットダウン回路・BMS・IMD・BSPD・充電に関わる (ESO の承認が必要)
+    validations:
+      required: true
+  - type: textarea
+    id: approval
+    attributes:
+      label: 審議・承認 (主査が記入)
+      value: |
+        - 関係ユニット担当者の合意: 
+        - 判定: 承認 / 条件付き承認 / 却下
+        - 承認者:
+        - 承認日:

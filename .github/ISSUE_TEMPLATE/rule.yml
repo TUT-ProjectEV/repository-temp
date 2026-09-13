@@ -1,0 +1,59 @@
+name: 規則確認
+description: 規則・ローカルルールの解釈、Rules Question、規則改訂への対応
+title: "[RULE] "
+labels: ["type:rule", "rule"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        確定した内容は [大会規則の参照](https://github.com/TUT-ProjectEV/.github-private/blob/main/regulations.md) と電装系要求仕様書に反映する。
+  - type: dropdown
+    id: source
+    attributes:
+      label: 対象の規則
+      options:
+        - Formula SAE Rules
+        - Formula SAE Japan Local Rules
+        - 大会の補足資料・FAQ・Q&A 回答
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: 版数・発行日
+      placeholder: "例: Formula SAE Rules 2026 V1.0 (2025-09-10)"
+    validations:
+      required: true
+  - type: input
+    id: article
+    attributes:
+      label: 条番号
+      placeholder: "例: EV.7.7.4 / J2026-EV-10"
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 種別
+      options:
+        - 解釈の確認
+        - 規則改訂への対応
+        - ローカルルール (緩和規定) の採否
+        - Rules Question / 大会への質問
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: 確認したいこと
+    validations:
+      required: true
+  - type: textarea
+    id: units
+    attributes:
+      label: 影響するユニット・成果物
+  - type: textarea
+    id: conclusion
+    attributes:
+      label: 結論 (確定後に記入)
+      description: 回答の原文、判断根拠、電装系要求仕様書・regulations.md への反映先
