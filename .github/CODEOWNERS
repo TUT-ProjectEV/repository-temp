@@ -1,0 +1,24 @@
+# CODEOWNERS
+# Pull request のレビュアを自動で割り当てる。
+# リポジトリ作成後、該当する例の行頭の "# " を外し、Team 名を確認する。
+# 後に書いた行が優先される。複数の Team を並べても、いずれか1名の承認で条件を満たす点に注意する。
+# 運用ルール: https://github.com/TUT-ProjectEV/.github-private/blob/main/repository.md#9-codeowners
+
+# ===== ユニットのリポジトリ =====
+# UNIT-TEAM をユニット群 Team (tbc / safety / powertrain) に置き換える。
+
+# *                         @TUT-ProjectEV/UNIT-TEAM
+
+# 高電圧・シャットダウン回路に関わるユニット (tbc / chg / jb / sdc / inv) では ESO を加える
+# /hardware/                @TUT-ProjectEV/UNIT-TEAM @TUT-ProjectEV/eso
+# /docs/design/             @TUT-ProjectEV/UNIT-TEAM @TUT-ProjectEV/eso
+
+# DR 議事録は主査
+# /docs/records/*/reviews/  @TUT-ProjectEV/system
+
+# ===== system リポジトリ =====
+# *                         @TUT-ProjectEV/system
+# /docs/interface/          @TUT-ProjectEV/system @TUT-ProjectEV/tbc @TUT-ProjectEV/safety @TUT-ProjectEV/powertrain
+# /docs/architecture/       @TUT-ProjectEV/system @TUT-ProjectEV/tbc @TUT-ProjectEV/safety @TUT-ProjectEV/powertrain
+# /harness/                 @TUT-ProjectEV/system @TUT-ProjectEV/eso
+# /docs/regulations/        @TUT-ProjectEV/system @TUT-ProjectEV/eso
