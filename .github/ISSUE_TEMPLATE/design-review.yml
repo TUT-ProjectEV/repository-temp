@@ -1,13 +1,15 @@
 name: デザインレビュー
-description: DR の準備・実施・記録
+description: DR0〜DR5 の準備・実施・判定の記録
 title: "[DR][UNIT] "
 labels: ["type:dr"]
 body:
   - type: markdown
     attributes:
       value: |
-        進め方は [デザインレビュー](https://github.com/TUT-ProjectEV/.github-private/blob/main/design-review.md) に従う。レビューの3日前までに起票し、入力成果物をレビュー可能な状態にする。
-        合格後、主査が `develop` → `main` の Pull request を作り、タグを付ける。
+        進め方は [デザインレビュー](https://github.com/TUT-ProjectEV/.github-private/blob/main/design-review.md) に従う。**この Issue が DR の記録になる。** レビューの3日前までに起票する。
+        - 口頭で合意した内容は、ここに書かれていなければ存在しない
+        - 指摘は1件ずつ作業項目の Issue にし、`severity:` ラベルを付けて、この Issue のサブ Issue にする
+        - DR3 / DR4 は、回路図レビュー用 / アートワークレビュー用のテンプレートで Pull request を出し、入力成果物に書く
   - type: input
     id: dr-id
     attributes:
@@ -29,9 +31,18 @@ body:
     validations:
       required: true
   - type: input
+    id: target
+    attributes:
+      label: 対象
+      description: ユニット略号、基板ID、または電装系全体を表す SYSTEM
+      placeholder: "例: TBC"
+    validations:
+      required: true
+  - type: input
     id: date
     attributes:
-      label: 実施予定日時・場所
+      label: 実施日時・場所
+      placeholder: "例: 2026-03-15 13:00〜、工房 (対面)"
     validations:
       required: true
   - type: textarea
@@ -49,24 +60,47 @@ body:
     id: inputs
     attributes:
       label: 入力成果物
-      description: ファイルへのリンク、または Pull request
+      description: 文書と章、コミットまたは Pull request。DR3 / DR4 はレビュー用の Pull request
+      placeholder: "例: docs/TBC-SPEC.md の 3〜6 章、docs/TBC-PCB-CELL-SPEC.md (Pull request #58)"
     validations:
       required: true
-  - type: checkboxes
-    id: prep
+  - type: textarea
+    id: selfcheck
     attributes:
-      label: 事前準備
-      options:
-        - label: 入力成果物がレビュー可能な状態にある
-        - label: 説明者がフェーズの完了条件を自己点検した
-        - label: レビュアに事前に成果物を共有した
+      label: 完了条件の自己点検
+      description: phases.md の該当フェーズの「完了条件」を貼り、確認したものにチェックを入れる。満たさない項目は理由を書く
+      placeholder: |
+        - [x] すべてのユニット要求が、いずれかの機能ブロックに割り当てられている
+        - [ ] 搭載寸法、取付方法、コネクタ位置について機械班と合意している (理由: 3/20 に合意予定)
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: 説明の要点
+      description: 設計の意図、前年度からの変更点、特に見てほしい点
+  - type: textarea
+    id: discussion
+    attributes:
+      label: 議論の記録 (実施後に記入)
+      description: 結論に至らなかった議論と、採否の判断理由。次年度が同じ議論を繰り返さないために残す
   - type: textarea
     id: result
     attributes:
-      label: 結果 (実施後に記入)
+      label: 判定 (実施後に主査が記入)
       value: |
         - 判定: 合格 / 条件付き合格 / 再審
-        - 議事録: docs/records/<車両コード>/reviews/<DR ID>.md
-        - 指摘 Issue:
-        - main への Pull request:
-        - タグ:
+        - 条件 (条件付き合格の場合):
+        - 条件の確認者:
+        - 再審予定日 (再審の場合):
+        - 次フェーズの着手可否:
+  - type: textarea
+    id: followup
+    attributes:
+      label: 事後対応 (主査)
+      description: すべて済んだらこの Issue を close する
+      value: |
+        - [ ] 指摘を作業項目の Issue にし、この Issue のサブ Issue にした
+        - [ ] 対象文書の章の「承認」に、DR ID とこの Issue 番号を書いた
+        - [ ] (条件付き合格の場合) 全ての 致命・重要 の指摘が完了したことを確認した
+        - [ ] (合格時) develop → main をマージし、タグを付けた (タグ: )

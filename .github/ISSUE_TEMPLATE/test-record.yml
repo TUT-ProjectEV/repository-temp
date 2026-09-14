@@ -1,0 +1,122 @@
+name: テスト記録
+description: 単体・結合・システム・受入テストの実施結果
+title: "[TEST][UNIT] "
+labels: ["type:test"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **この Issue がテストの記録になる。** 試験項目は、基板仕様書 (単体)、ユニット仕様書 (結合)、電装系仕様書 (システム・受入) のテスト項目を使う。
+        - **実測値を残す。** 「OK」だけの記録は、次年度にも不具合解析にも使えない
+        - 不合格の項目は不具合の Issue を起票し、ここに番号を書く
+        - 波形・写真はこの Issue に貼り付ける。大きなログは共有ストレージに置き、パスを書く
+        - 未実施の項目は、実施したふりをせず理由を書く
+        - 記録したら、仕様書の要求一覧の「結果」にこの Issue 番号を書く
+  - type: input
+    id: tr-id
+    attributes:
+      label: テスト記録 ID
+      placeholder: "例: TR-UT-SDC-20260428"
+    validations:
+      required: true
+  - type: dropdown
+    id: level
+    attributes:
+      label: 試験レベル
+      options:
+        - 単体テスト
+        - 結合テスト
+        - システムテスト
+        - 受入テスト
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: テスト項目の出典
+      description: 文書と章、使った版のタグまたはコミット
+      placeholder: "例: docs/SDC-PCB-MAIN-SPEC.md の 11 章 (コミット a1b2c3d)"
+    validations:
+      required: true
+  - type: textarea
+    id: people
+    attributes:
+      label: 実施日・実施者・立会者
+      value: |
+        - 実施日:
+        - 実施者:
+        - 立会者:
+    validations:
+      required: true
+  - type: textarea
+    id: dut
+    attributes:
+      label: 供試体
+      value: |
+        - 基板ID / リビジョン (ユニット・車両の場合はその構成):
+        - 個体識別:
+        - ファームウェアのタグとコミット:
+        - ハーネス:
+        - 改造・暫定対応 (ジャンパ、定数変更など):
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: 試験環境
+      value: |
+        - 使用測定器と設定:
+        - 治具・模擬環境:
+        - 電源設定:
+        - 環境条件 (室温・天候):
+        - 場所:
+  - type: textarea
+    id: results
+    attributes:
+      label: 試験結果
+      description: 1 項目 1 行。判定は 合格 / 不合格 / 条件付き / 未実施
+      value: |
+        | テストID | 判定 | 判定基準 | 実測値・結果 | 備考 |
+        | --- | --- | --- | --- | --- |
+        |  |  |  |  |  |
+    validations:
+      required: true
+  - type: textarea
+    id: skipped
+    attributes:
+      label: 未実施の項目と理由
+      description: 実施に必要な条件と実施予定も書く
+  - type: textarea
+    id: defects
+    attributes:
+      label: 不具合
+      description: 起票した不具合の Issue 番号
+  - type: textarea
+    id: notes
+    attributes:
+      label: 所見
+      description: 判定基準は満たしたが気になった点、次リビジョン・次年度への申し送り。数値の傾向や余裕度
+  - type: dropdown
+    id: overall
+    attributes:
+      label: 総合判定
+      options:
+        - 合格
+        - 条件付き合格
+        - 不合格
+    validations:
+      required: true
+  - type: textarea
+    id: next
+    attributes:
+      label: 次のアクション
+      value: |
+        - 次のフェーズへ進めるか:
+        - 条件 (条件付き合格の場合):
+        - 再試験が必要な項目:
+        - 判定者:
+  - type: textarea
+    id: attachments
+    attributes:
+      label: ログ・波形・写真
+      description: 画像はドラッグして貼り付ける。大きなファイルは共有ストレージのパスを書く

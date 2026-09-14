@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        確定した内容は [大会規則の参照](https://github.com/TUT-ProjectEV/.github-private/blob/main/regulations.md) と電装系要求仕様書に反映する。
+        確定した内容は [大会規則の参照](https://github.com/TUT-ProjectEV/.github-private/blob/main/regulations.md) と電装系仕様書に反映する。
   - type: dropdown
     id: source
     attributes:
@@ -56,4 +56,4 @@ body:
     id: conclusion
     attributes:
       label: 結論 (確定後に記入)
-      description: 回答の原文、判断根拠、電装系要求仕様書・regulations.md への反映先
+      description: 回答の原文、判断根拠、電装系仕様書・regulations.md への反映先

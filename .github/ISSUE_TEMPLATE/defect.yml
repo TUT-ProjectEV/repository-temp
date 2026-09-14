@@ -11,7 +11,7 @@ body:
     id: source
     attributes:
       label: 発生したテスト ID / 走行記録
-      placeholder: "例: IT-TBC-003、EV26 走行記録 2026-05-10"
+      placeholder: "例: IT-TBC-003 (テスト記録 #52)、EV26 走行記録 2026-05-10"
     validations:
       required: true
   - type: input

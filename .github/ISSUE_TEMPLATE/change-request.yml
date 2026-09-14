@@ -6,8 +6,8 @@ body:
   - type: markdown
     attributes:
       value: |
-        変更を止める仕組みではなく、**変更を関係者に伝え、再試験の要否を判断する**仕組み。
-        項目は [設計変更要求テンプレート](https://github.com/TUT-ProjectEV/.github-private/blob/main/templates/change-request.md) に対応する。承認後、`fix/<この Issue 番号>-<内容>` ブランチで修正する。
+        **この Issue が設計変更の記録になる。** 変更を止める仕組みではなく、**変更を関係者に伝え、再試験の要否を判断する**仕組み。
+        承認後、`fix/<この Issue 番号>-<内容>` ブランチで修正する。`main` へのマージ後にタグ `<車両コード>-ECR-<3桁>` を付けて close する。
   - type: input
     id: ecr-id
     attributes:
@@ -18,21 +18,25 @@ body:
   - type: textarea
     id: target
     attributes:
-      label: 対象の成果物と版数
-      description: 承認済みのタグへのリンク
+      label: 対象の成果物
+      description: 文書と章、基板リビジョン、承認済みのタグ
+      placeholder: "例: docs/SDC-PCB-MAIN-SPEC.md の 6 章、SDC-PCB-MAIN-revA の回路図 (タグ EV26-DR3-SDC-PCB-MAIN-revA)"
     validations:
       required: true
   - type: textarea
     id: change
     attributes:
       label: 変更前 / 変更後
+      placeholder: |
+        - 変更前: BSPD の遅延時定数 0.45 秒
+        - 変更後: BSPD の遅延時定数 0.3 秒
     validations:
       required: true
   - type: textarea
     id: reason
     attributes:
       label: 変更理由と発生源
-      description: 不具合の Issue 番号、テスト ID、DR 指摘、規則改訂 (条番号) など
+      description: 不具合の Issue 番号、テスト記録、DR 指摘、規則改訂 (条番号) など。変更しない場合に起きることも書く
     validations:
       required: true
   - type: checkboxes
@@ -40,11 +44,11 @@ body:
     attributes:
       label: 影響範囲
       options:
-        - label: 要求仕様
+        - label: 要求 (電装系仕様書・ユニット仕様書の要求一覧)
         - label: インタフェース (相手ユニットの担当者の合意が必要)
         - label: 回路図・基板 (再製作の要否を下に書く)
         - label: ソフトウェア
-        - label: 筐体・搭載
+        - label: 筐体・搭載 (機械班の確認が必要)
         - label: ハーネス
         - label: 規則適合・車検・提出書類 (ESF など)
         - label: コスト・スケジュール
@@ -55,7 +59,12 @@ body:
   - type: textarea
     id: retest
     attributes:
-      label: 再試験が必要なテスト ID
+      label: 再試験の要否
+      description: 変更により無効になるテスト結果を洗い出す。ここが ECR の最大の目的
+      value: |
+        | テストID | 項目名 | 再試験 | 理由 | 実施予定日 | 担当 |
+        | --- | --- | --- | --- | --- | --- |
+        |  |  | 要 / 不要 |  |  |  |
     validations:
       required: true
   - type: dropdown
@@ -68,11 +77,29 @@ body:
     validations:
       required: true
   - type: textarea
+    id: plan
+    attributes:
+      label: 対応計画
+      value: |
+        - [ ] 作業: (担当: 、期限: )
+  - type: textarea
     id: approval
     attributes:
       label: 審議・承認 (主査が記入)
       value: |
-        - 関係ユニット担当者の合意: 
+        - 関係ユニット担当者・機械班の合意:
         - 判定: 承認 / 条件付き承認 / 却下
+        - 条件:
         - 承認者:
         - 承認日:
+  - type: textarea
+    id: completion
+    attributes:
+      label: 完了確認
+      description: すべて済んだらこの Issue を close する
+      value: |
+        - [ ] 対象の文書を更新した (要求一覧、インタフェース定義書、基板仕様書など影響を受けるものすべて)
+        - [ ] 再試験が必要な項目をすべて再実施し、テスト記録の Issue を作った
+        - [ ] 関係者へ変更を周知した
+        - [ ] 現物 (基板の改造など) と文書が一致している
+        - [ ] main に反映し、タグを付けた (タグ: )
