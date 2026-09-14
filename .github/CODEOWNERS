@@ -11,14 +11,12 @@
 
 # 高電圧・シャットダウン回路に関わるユニット (tbc / chg / jb / sdc / inv) では ESO を加える
 # /hardware/                @TUT-ProjectEV/UNIT-TEAM @TUT-ProjectEV/eso
-# /docs/design/             @TUT-ProjectEV/UNIT-TEAM @TUT-ProjectEV/eso
-
-# DR 議事録は主査
-# /docs/records/*/reviews/  @TUT-ProjectEV/system
+# /docs/                    @TUT-ProjectEV/UNIT-TEAM @TUT-ProjectEV/eso
 
 # ===== system リポジトリ =====
 # *                         @TUT-ProjectEV/system
-# /docs/interface/          @TUT-ProjectEV/system @TUT-ProjectEV/tbc @TUT-ProjectEV/safety @TUT-ProjectEV/powertrain
-# /docs/architecture/       @TUT-ProjectEV/system @TUT-ProjectEV/tbc @TUT-ProjectEV/safety @TUT-ProjectEV/powertrain
+# /docs/SYS-SPEC.md         @TUT-ProjectEV/system @TUT-ProjectEV/tbc @TUT-ProjectEV/safety @TUT-ProjectEV/powertrain
+# /docs/SYS-IF-SPEC.md      @TUT-ProjectEV/system @TUT-ProjectEV/tbc @TUT-ProjectEV/safety @TUT-ProjectEV/powertrain
+# /docs/*.dbc               @TUT-ProjectEV/system @TUT-ProjectEV/tbc @TUT-ProjectEV/safety @TUT-ProjectEV/powertrain
 # /harness/                 @TUT-ProjectEV/system @TUT-ProjectEV/eso
 # /docs/regulations/        @TUT-ProjectEV/system @TUT-ProjectEV/eso
