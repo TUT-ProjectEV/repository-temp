@@ -1,5 +1,5 @@
-name: 作業
-description: 要求・設計・実装・テストの作業項目
+name: 作業項目
+description: 要求・設計・実装・テストの作業
 title: "[UNIT] "
 labels: ["type:task"]
 body:
