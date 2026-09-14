@@ -2,6 +2,7 @@
 Pull request を作る前に、画面上部の入力欄を確認する (この本文には書かない)
 - タイトル欄: [<ユニット略号>] <内容>  例: [SDC] BSPD 遅延回路の定数変更
 - base ブランチ: develop (既定の main から変更する。main への Pull request は主査が作る)
+- 回路図・アートワークのレビュー (DR3 / DR4) は専用のテンプレートを使う。作成画面の URL の末尾に ?quick_pull=1&template=schematic-review.md または artwork-review.md を付ける
 運用ルール: https://github.com/TUT-ProjectEV/.github-private/blob/main/repository.md#8-pull-request
 -->
 
@@ -12,13 +13,12 @@ Pull request を作る前に、画面上部の入力欄を確認する (この�
 ## 変更の種別
 - [ ] 要求仕様 (`req`)
 - [ ] 構成図・インタフェース定義 (`arch`)
-- [ ] 設計書 (`design`)
+- [ ] ユニット仕様書・基板仕様書の設計 (`design`)
 - [ ] 回路図・アートワーク・製造データ (`hw`)
 - [ ] ソースコード (`fw`)
 - [ ] 筐体・搭載 (`mech`)
 - [ ] ハーネス (`harness`)
-- [ ] テスト仕様書・報告書・治具 (`test`)
-- [ ] DR 議事録・チェックリスト (`review`)
+- [ ] テスト項目・治具・テストスクリプト (`test`)
 - [ ] 不具合の修正 (`fix`)
 
 ## 変更内容
@@ -45,7 +45,7 @@ Pull request を作る前に、画面上部の入力欄を確認する (この�
 - [ ] 関わる → `safety:hv` ラベルを付け、ESO (`@TUT-ProjectEV/eso`) をレビュアに指定した
 
 ## 検証
-<!-- 実施したテスト ID と結果、テスト報告書へのリンク、ERC / DRC の結果、書き込んだファームウェアのタグ -->
+<!-- 実施したテスト ID と、テスト記録の Issue 番号、ERC / DRC の結果、書き込んだファームウェアのタグ -->
 
 ## セルフチェック
 - [ ] テンプレートの記入要領と、該当フェーズの完了条件を確認した
