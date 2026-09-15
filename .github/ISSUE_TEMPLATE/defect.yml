@@ -8,6 +8,14 @@ body:
       value: |
         事故・ヒヤリハットは、原因の所在にかかわらず記録する。原因が判明したら、**原因があるフェーズ**の `phase:` ラベルを付ける。
   - type: input
+    id: vehicle
+    attributes:
+      label: 対象車両
+      description: 車両コード。ID は車両ごとに採番するため、車両コードとセットで記録する
+      placeholder: "例: EV26"
+    validations:
+      required: true
+  - type: input
     id: source
     attributes:
       label: 発生したテスト ID / 走行記録

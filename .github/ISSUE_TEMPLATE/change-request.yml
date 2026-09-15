@@ -15,6 +15,14 @@ body:
       placeholder: "例: ECR-003"
     validations:
       required: true
+  - type: input
+    id: vehicle
+    attributes:
+      label: 対象車両
+      description: 車両コード。ID は車両ごとに採番するため、車両コードとセットで記録する
+      placeholder: "例: EV26"
+    validations:
+      required: true
   - type: textarea
     id: target
     attributes:
@@ -67,6 +75,16 @@ body:
         |  |  | 要 / 不要 |  |  |  |
     validations:
       required: true
+  - type: textarea
+    id: rejudge
+    attributes:
+      label: 再判定が必要なゲート
+      description: ECR の承認 (変更してよいか) とは別に、変更後のものを製造・使用してよいかを判定する。基準は design-review.md「5.1 変更後の再判定」
+      value: |
+        - 再判定: 不要 / 担当者と主査の確認 (DR0〜DR2 の範囲) / 回路図の再レビュー (DR3) / DR4 の再実施 / DR5 の再判定
+        - 記録 (Pull request またはデザインレビューの Issue):
+    validations:
+      required: true
   - type: dropdown
     id: safety
     attributes:
@@ -100,6 +118,7 @@ body:
       value: |
         - [ ] 対象の文書を更新した (要求一覧、インタフェース定義書、基板仕様書など影響を受けるものすべて)
         - [ ] 再試験が必要な項目をすべて再実施し、テスト記録の Issue を作った
+        - [ ] 再判定が必要なゲートの再判定が済んだ (記録: )
         - [ ] 関係者へ変更を周知した
         - [ ] 現物 (基板の改造など) と文書が一致している
-        - [ ] main に反映し、タグを付けた (タグ: )
+        - [ ] release/ ブランチ経由で main に反映し、タグを付けた (タグ: 例 EV26-ECR-003)

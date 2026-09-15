@@ -10,11 +10,21 @@ body:
         - 口頭で合意した内容は、ここに書かれていなければ存在しない
         - 指摘は1件ずつ作業項目の Issue にし、`severity:` ラベルを付けて、この Issue のサブ Issue にする
         - DR3 / DR4 は、回路図レビュー用 / アートワークレビュー用のテンプレートで Pull request を出し、入力成果物に書く
+        - `safety:hv` が付く対象では、ESO がレビュアに入る
+        - 承認後の変更による再判定 (DR4 の再実施、DR5 の再判定など) も、新しい DR ID でこのフォームから起票する
   - type: input
     id: dr-id
     attributes:
       label: DR ID
       placeholder: "例: DR2-TBC-20260315"
+    validations:
+      required: true
+  - type: input
+    id: vehicle
+    attributes:
+      label: 対象車両
+      description: 車両コード。ID は車両ごとに採番するため、車両コードとセットで記録する
+      placeholder: "例: EV26"
     validations:
       required: true
   - type: dropdown
@@ -101,6 +111,7 @@ body:
       description: すべて済んだらこの Issue を close する
       value: |
         - [ ] 指摘を作業項目の Issue にし、この Issue のサブ Issue にした
-        - [ ] 対象文書の章の「承認」に、DR ID とこの Issue 番号を書いた
+        - [ ] 対象文書の章の「承認」に、この Issue へのリンクを書いた (例: [DR2-TBC-20260315 (tbc#60)](https://github.com/TUT-ProjectEV/tbc/issues/60))
         - [ ] (条件付き合格の場合) 全ての 致命・重要 の指摘が完了したことを確認した
-        - [ ] (合格時) develop → main をマージし、タグを付けた (タグ: )
+        - [ ] (合格時) release/<DR ID> ブランチ経由で承認対象を main に反映し、main を develop にマージし戻した
+        - [ ] (合格時) 回次付きのタグを付けた (タグ: 例 EV26-DR2-1、EV26-DR4-SDC-PCB-MAIN-revB-1)

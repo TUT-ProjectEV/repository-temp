@@ -25,10 +25,10 @@
 DR・テスト・設計変更の記録は、このリポジトリの Issue (デザインレビュー、テスト記録、設計変更要求) にある。
 
 ## 基板・ファームウェア
-| 対象 | 現行リビジョン / バージョン | 承認済みのタグ | 備考 |
+| 対象 | 車両に載せているリビジョン / 書き込んだ版 | 承認済みのタグ (DR / ECR) | 備考 |
 | --- | --- | --- | --- |
-| `<基板ID>` | `revA` | | |
-| ファームウェア | | `<車両コード>-FW-v<x.y.z>` | |
+| `<基板ID>` | `revA` | `<車両コード>-DR4-<基板ID>-<回次>` | |
+| ファームウェア | `<車両コード>-FW-v<x.y.z>` | `<車両コード>-DR5-<回次>` | 走行に使う FW は `main` 上のコミット。ベンチ試験は `develop` 上でもよい |
 
 ## ディレクトリ構成
 ```
@@ -60,12 +60,12 @@ DR・テスト・設計変更の記録は、このリポジトリの Issue (デ�
 | ファームウェア開発環境 | |
 
 ## 関連する文書
-| 文書 | 内容 |
-| --- | --- |
-| [電装系仕様書](https://github.com/TUT-ProjectEV/system/blob/main/docs/SYS-SPEC.md) | このユニットに割り当てられた電装系要求、電装系の構成 |
-| [インタフェース定義書](https://github.com/TUT-ProjectEV/system/blob/main/docs/SYS-IF-SPEC.md) | このユニットの入出力の正本 |
-| [開発フロー](https://github.com/TUT-ProjectEV/.github-private/blob/main/README.md) | V字モデル、ユニット、成果物と ID、安全のルール |
-| [開発フェーズ](https://github.com/TUT-ProjectEV/.github-private/blob/main/phases.md) | 各フェーズの入力・実施内容・成果物・完了条件 |
-| [デザインレビュー](https://github.com/TUT-ProjectEV/.github-private/blob/main/design-review.md) | DR0〜DR5 の進め方と判定 |
-| [リポジトリ運用ルール](https://github.com/TUT-ProjectEV/.github-private/blob/main/repository.md) | ブランチ、Issue、Pull request、タグ |
-| [文書テンプレート](https://github.com/TUT-ProjectEV/.github-private/blob/main/README.md#43-テンプレート) | ユニット仕様書・基板仕様書の原本 |
+| 文書 | 内容 | 採用した版 (タグ) |
+| --- | --- | --- |
+| [電装系仕様書](https://github.com/TUT-ProjectEV/system/blob/main/docs/SYS-SPEC.md) | このユニットに割り当てられた電装系要求、電装系の構成 | `<採用したタグ (例: EV26-DR1-1)>` |
+| [インタフェース定義書](https://github.com/TUT-ProjectEV/system/blob/main/docs/SYS-IF-SPEC.md) | このユニットの入出力の正本 | `<採用したタグ (例: EV26-DR1-1)>` |
+| [開発フロー](https://github.com/TUT-ProjectEV/.github-private/blob/main/README.md) | V字モデル、ユニット、成果物と ID、安全のルール | `<ルールの版 (例: v1.0)>` |
+| [開発フェーズ](https://github.com/TUT-ProjectEV/.github-private/blob/main/phases.md) | 各フェーズの入力・実施内容・成果物・完了条件 | 同上 |
+| [デザインレビュー](https://github.com/TUT-ProjectEV/.github-private/blob/main/design-review.md) | DR0〜DR5 の進め方と判定 | 同上 |
+| [リポジトリ運用ルール](https://github.com/TUT-ProjectEV/.github-private/blob/main/repository.md) | ブランチ、Issue、Pull request、タグ | 同上 |
+| [文書テンプレート](https://github.com/TUT-ProjectEV/.github-private/blob/main/README.md#43-テンプレート) | ユニット仕様書・基板仕様書の原本 | 同上 |

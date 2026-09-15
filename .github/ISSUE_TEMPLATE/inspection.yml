@@ -12,6 +12,14 @@ body:
         - 記入済みの車検シートは `docs/records/<車両コード>/inspection/` に置く
         - 車検の順序・合否基準・持ち込み品の規則上の要求は [大会規則](https://github.com/TUT-ProjectEV/.github-private/blob/main/regulations.md#6-車検) を参照
   - type: input
+    id: vehicle
+    attributes:
+      label: 対象車両
+      description: 車両コード。ID は車両ごとに採番するため、車両コードとセットで記録する
+      placeholder: "例: EV26"
+    validations:
+      required: true
+  - type: input
     id: event
     attributes:
       label: 大会
