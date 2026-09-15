@@ -1,7 +1,7 @@
 <!--
 Pull request を作る前に、画面上部の入力欄を確認する (この本文には書かない)
 - タイトル欄: [<ユニット略号>] <内容>  例: [SDC] BSPD 遅延回路の定数変更
-- base ブランチ: develop (既定の main から変更する。main への Pull request は主査が作る)
+- base ブランチ: develop (既定の main から変更する)。main への Pull request は、DR の審査対象を固定した release/ ブランチから出す
 - 回路図・アートワークのレビュー (DR3 / DR4) は専用のテンプレートを使う。作成画面の URL の末尾に ?quick_pull=1&template=schematic-review.md または artwork-review.md を付ける
 運用ルール: https://github.com/TUT-ProjectEV/.github-private/blob/main/repository.md#8-pull-request
 -->

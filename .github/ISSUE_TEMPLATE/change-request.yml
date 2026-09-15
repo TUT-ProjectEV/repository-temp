@@ -28,7 +28,7 @@ body:
     attributes:
       label: 対象の成果物
       description: 文書と章、基板リビジョン、承認済みのタグ
-      placeholder: "例: docs/SDC-PCB-MAIN-SPEC.md の 6 章、SDC-PCB-MAIN-revA の回路図 (タグ EV26-DR3-SDC-PCB-MAIN-revA)"
+      placeholder: "例: docs/SDC-PCB-MAIN-SPEC.md の 6 章、SDC-PCB-MAIN-revA の回路図 (タグ EV26-DR3-SDC-PCB-MAIN-revA-1)"
     validations:
       required: true
   - type: textarea
@@ -79,7 +79,7 @@ body:
     id: rejudge
     attributes:
       label: 再判定が必要なゲート
-      description: ECR の承認 (変更してよいか) とは別に、変更後のものを製造・使用してよいかを判定する。基準は design-review.md「5.1 変更後の再判定」
+      description: ECR の承認 (変更してよいか) とは別に、変更後のものを製造・使用してよいかを判定する。基準は design-review.md「5.1 変更後の再判定」。製造前のゲート (DR3・DR4) は製造の前に、DR5 は再試験の後に行う
       value: |
         - 再判定: 不要 / 担当者と主査の確認 (DR0〜DR2 の範囲) / 回路図の再レビュー (DR3) / DR4 の再実施 / DR5 の再判定
         - 記録 (Pull request またはデザインレビューの Issue):

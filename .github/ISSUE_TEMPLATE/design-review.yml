@@ -9,7 +9,7 @@ body:
         進め方は [デザインレビュー](https://github.com/TUT-ProjectEV/.github-private/blob/main/design-review.md) に従う。**この Issue が DR の記録になる。** レビューの3日前までに起票する。
         - 口頭で合意した内容は、ここに書かれていなければ存在しない
         - 指摘は1件ずつ作業項目の Issue にし、`severity:` ラベルを付けて、この Issue のサブ Issue にする
-        - DR3 / DR4 は、回路図レビュー用 / アートワークレビュー用のテンプレートで Pull request を出し、入力成果物に書く
+        - 審査対象は release/ ブランチに固定し、main への Pull request (DR3 / DR4 は回路図レビュー用 / アートワークレビュー用のテンプレート) を入力成果物に書く
         - `safety:hv` が付く対象では、ESO がレビュアに入る
         - 承認後の変更による再判定 (DR4 の再実施、DR5 の再判定など) も、新しい DR ID でこのフォームから起票する
   - type: input
@@ -70,8 +70,8 @@ body:
     id: inputs
     attributes:
       label: 入力成果物
-      description: 文書と章、コミットまたは Pull request。DR3 / DR4 はレビュー用の Pull request
-      placeholder: "例: docs/TBC-SPEC.md の 3〜6 章、docs/TBC-PCB-CELL-SPEC.md (Pull request #58)"
+      description: 審査対象を固定した release/ → main の Pull request とコミット、対象の文書と章
+      placeholder: "例: release/dr2-tbc-20260315 → main の Pull request TUT-ProjectEV/tbc#58 (コミット a1b2c3d)。docs/TBC-SPEC.md の 3〜6 章、docs/TBC-PCB-CELL-SPEC.md"
     validations:
       required: true
   - type: textarea
@@ -111,7 +111,7 @@ body:
       description: すべて済んだらこの Issue を close する
       value: |
         - [ ] 指摘を作業項目の Issue にし、この Issue のサブ Issue にした
-        - [ ] 対象文書の章の「承認」に、この Issue へのリンクを書いた (例: [DR2-TBC-20260315 (tbc#60)](https://github.com/TUT-ProjectEV/tbc/issues/60))
+        - [ ] 対象文書の章の「承認」に、この Issue へのリンクを書いた (例: [DR2-TBC-20260315 (TUT-ProjectEV/tbc#60)](https://github.com/TUT-ProjectEV/tbc/issues/60))
         - [ ] (条件付き合格の場合) 全ての 致命・重要 の指摘が完了したことを確認した
-        - [ ] (合格時) release/<DR ID> ブランチ経由で承認対象を main に反映し、main を develop にマージし戻した
+        - [ ] (合格時) 審査した release/ ブランチの Pull request を main にマージし、main を develop にマージし戻した
         - [ ] (合格時) 回次付きのタグを付けた (タグ: 例 EV26-DR2-1、EV26-DR4-SDC-PCB-MAIN-revB-1)
