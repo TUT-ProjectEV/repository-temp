@@ -16,7 +16,8 @@ body:
     id: dr-id
     attributes:
       label: DR ID
-      placeholder: "例: DR2-TBC-20260315"
+      description: 同じ日・同じ対象の2件目以降は、末尾の連番を上げる
+      placeholder: "例: DR2-TBC-20260315-01"
     validations:
       required: true
   - type: input
@@ -71,7 +72,7 @@ body:
     attributes:
       label: 入力成果物
       description: 審査対象を固定した release/ → main の Pull request とコミット、対象の文書と章
-      placeholder: "例: release/dr2-tbc-20260315 → main の Pull request TUT-ProjectEV/tbc#58 (コミット a1b2c3d)。docs/TBC-SPEC.md の 3〜6 章、docs/TBC-PCB-CELL-SPEC.md"
+      placeholder: "例: release/dr2-tbc-20260315-01 → main の Pull request TUT-ProjectEV/tbc#58 (コミット a1b2c3d)。docs/TBC-SPEC.md の 3〜6 章、docs/TBC-PCB-CELL-SPEC.md"
     validations:
       required: true
   - type: textarea
@@ -111,7 +112,7 @@ body:
       description: すべて済んだらこの Issue を close する
       value: |
         - [ ] 指摘を作業項目の Issue にし、この Issue のサブ Issue にした
-        - [ ] 対象文書の章の「承認」に、この Issue へのリンクを書いた (例: [DR2-TBC-20260315 (TUT-ProjectEV/tbc#60)](https://github.com/TUT-ProjectEV/tbc/issues/60))
+        - [ ] 対象文書の章の「承認」に、この Issue へのリンクを書いた (例: [DR2-TBC-20260315-01 (TUT-ProjectEV/tbc#60)](https://github.com/TUT-ProjectEV/tbc/issues/60))
         - [ ] (条件付き合格の場合) 全ての 致命・重要 の指摘が完了したことを確認した
         - [ ] (合格時) 審査した release/ ブランチの Pull request を main にマージし、main を develop にマージし戻した
         - [ ] (合格時) 回次付きのタグを付けた (タグ: 例 EV26-DR2-1、EV26-DR4-SDC-PCB-MAIN-revB-1)
