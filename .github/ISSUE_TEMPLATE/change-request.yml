@@ -1,0 +1,124 @@
+name: 設計変更要求 (ECR)
+description: 承認済み (DR 通過済み) の成果物を変更する
+title: "[ECR][UNIT] "
+labels: ["type:ecr"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **この Issue が設計変更の記録になる。** 変更を止める仕組みではなく、**変更を関係者に伝え、再試験の要否を判断する**仕組み。
+        承認後、`fix/<この Issue 番号>-<内容>` ブランチで修正する。`main` へのマージ後にタグ `<車両コード>-ECR-<3桁>` を付けて close する。
+  - type: input
+    id: ecr-id
+    attributes:
+      label: 変更要求 ID
+      placeholder: "例: ECR-003"
+    validations:
+      required: true
+  - type: input
+    id: vehicle
+    attributes:
+      label: 対象車両
+      description: 車両コード。ID は車両ごとに採番するため、車両コードとセットで記録する
+      placeholder: "例: EV26"
+    validations:
+      required: true
+  - type: textarea
+    id: target
+    attributes:
+      label: 対象の成果物
+      description: 文書と章、基板リビジョン、承認済みのタグ
+      placeholder: "例: docs/SDC-PCB-MAIN-SPEC.md の 6 章、SDC-PCB-MAIN-revA の回路図 (タグ EV26-DR3-SDC-PCB-MAIN-revA-1)"
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: 変更前 / 変更後
+      placeholder: |
+        - 変更前: BSPD の遅延時定数 0.45 秒
+        - 変更後: BSPD の遅延時定数 0.3 秒
+    validations:
+      required: true
+  - type: textarea
+    id: reason
+    attributes:
+      label: 変更理由と発生源
+      description: 不具合の Issue 番号、テスト記録、DR 指摘、規則改訂 (条番号) など。変更しない場合に起きることも書く
+    validations:
+      required: true
+  - type: checkboxes
+    id: impact
+    attributes:
+      label: 影響範囲
+      options:
+        - label: 要求 (電装系仕様書・ユニット仕様書の要求一覧)
+        - label: インタフェース (相手ユニットの担当者の合意が必要)
+        - label: 回路図・基板 (再製作の要否を下に書く)
+        - label: ソフトウェア
+        - label: 筐体・搭載 (機械班の確認が必要)
+        - label: ハーネス
+        - label: 規則適合・車検・提出書類 (ESF など)
+        - label: コスト・スケジュール
+  - type: textarea
+    id: impact-detail
+    attributes:
+      label: 影響の詳細
+  - type: textarea
+    id: retest
+    attributes:
+      label: 再試験の要否
+      description: 変更により無効になるテスト結果を洗い出す。ここが ECR の最大の目的
+      value: |
+        | テストID | 項目名 | 再試験 | 理由 | 実施予定日 | 担当 |
+        | --- | --- | --- | --- | --- | --- |
+        |  |  | 要 / 不要 |  |  |  |
+    validations:
+      required: true
+  - type: textarea
+    id: rejudge
+    attributes:
+      label: 再判定が必要なゲート
+      description: ECR の承認 (変更してよいか) とは別に、変更後のものを製造・使用してよいかを判定する。基準は design-review.md「5.1 変更後の再判定」。製造前のゲート (DR3・DR4) は製造の前に、DR5 は再試験の後に行う
+      value: |
+        - 再判定: 不要 / 担当者と主査の確認 (DR0〜DR2 の範囲) / 回路図の再レビュー (DR3) / DR4 の再実施 / DR5 の再判定
+        - 記録 (Pull request またはデザインレビューの Issue):
+    validations:
+      required: true
+  - type: dropdown
+    id: safety
+    attributes:
+      label: 安全への影響
+      options:
+        - 関わらない
+        - TS・シャットダウン回路・BMS・IMD・BSPD・充電に関わる (ESO の承認が必要)
+    validations:
+      required: true
+  - type: textarea
+    id: plan
+    attributes:
+      label: 対応計画
+      value: |
+        - [ ] 作業: (担当: 、期限: )
+  - type: textarea
+    id: approval
+    attributes:
+      label: 審議・承認 (主査が記入)
+      value: |
+        - 関係ユニット担当者・機械班の合意:
+        - 判定: 承認 / 条件付き承認 / 却下
+        - 条件:
+        - 承認者:
+        - 承認日:
+  - type: textarea
+    id: completion
+    attributes:
+      label: 完了確認
+      description: すべて済んだらこの Issue を close する
+      value: |
+        - [ ] 対象の文書を更新した (要求一覧、インタフェース定義書、基板仕様書など影響を受けるものすべて)
+        - [ ] 再試験が必要な項目をすべて再実施し、テスト記録の Issue を作った
+        - [ ] 再判定が必要なゲートの再判定が済んだ (記録: )
+        - [ ] 関係者へ変更を周知した
+        - [ ] 現物 (基板の改造など) と文書が一致している
+        - [ ] release/ ブランチ経由で main に反映し、タグを付けた (タグ: 例 EV26-ECR-003)

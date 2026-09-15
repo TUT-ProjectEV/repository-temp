@@ -1,0 +1,118 @@
+name: デザインレビュー
+description: DR0〜DR5 の準備・実施・判定の記録
+title: "[DR][UNIT] "
+labels: ["type:dr"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        進め方は [デザインレビュー](https://github.com/TUT-ProjectEV/.github-private/blob/main/design-review.md) に従う。**この Issue が DR の記録になる。** レビューの3日前までに起票する。
+        - 口頭で合意した内容は、ここに書かれていなければ存在しない
+        - 指摘は1件ずつ作業項目の Issue にし、`severity:` ラベルを付けて、この Issue のサブ Issue にする
+        - 審査対象は release/ ブランチに固定し、main への Pull request (DR3 / DR4 は回路図レビュー用 / アートワークレビュー用のテンプレート) を入力成果物に書く
+        - `safety:hv` が付く対象では、ESO がレビュアに入る
+        - 承認後の変更による再判定 (DR4 の再実施、DR5 の再判定など) も、新しい DR ID でこのフォームから起票する
+  - type: input
+    id: dr-id
+    attributes:
+      label: DR ID
+      description: 同じ日・同じ対象の2件目以降は、末尾の連番を上げる
+      placeholder: "例: DR2-TBC-20260315-01"
+    validations:
+      required: true
+  - type: input
+    id: vehicle
+    attributes:
+      label: 対象車両
+      description: 車両コード。ID は車両ごとに採番するため、車両コードとセットで記録する
+      placeholder: "例: EV26"
+    validations:
+      required: true
+  - type: dropdown
+    id: gate
+    attributes:
+      label: ゲート
+      options:
+        - DR0 要件定義完了
+        - DR1 基本設計完了
+        - DR2 詳細設計完了
+        - DR3 回路図完成
+        - DR4 アートワーク完成 (発注可否)
+        - DR5 システムテスト完了 (走行可否)
+    validations:
+      required: true
+  - type: input
+    id: target
+    attributes:
+      label: 対象
+      description: ユニット略号、基板ID、または電装系全体を表す SYSTEM
+      placeholder: "例: TBC"
+    validations:
+      required: true
+  - type: input
+    id: date
+    attributes:
+      label: 実施日時・場所
+      placeholder: "例: 2026-03-15 13:00〜、工房 (対面)"
+    validations:
+      required: true
+  - type: textarea
+    id: members
+    attributes:
+      label: 参加者
+      value: |
+        - 主査:
+        - 説明者:
+        - レビュア (担当者以外。DR4 / DR5 は2名以上):
+        - 助言者 (ESA / OB / 教員):
+    validations:
+      required: true
+  - type: textarea
+    id: inputs
+    attributes:
+      label: 入力成果物
+      description: 審査対象を固定した release/ → main の Pull request とコミット、対象の文書と章
+      placeholder: "例: release/dr2-tbc-20260315-01 → main の Pull request TUT-ProjectEV/tbc#58 (コミット a1b2c3d)。docs/TBC-SPEC.md の 3〜6 章、docs/TBC-PCB-CELL-SPEC.md"
+    validations:
+      required: true
+  - type: textarea
+    id: selfcheck
+    attributes:
+      label: 完了条件の自己点検
+      description: phases.md の該当フェーズの「完了条件」を貼り、確認したものにチェックを入れる。満たさない項目は理由を書く
+      placeholder: |
+        - [x] すべてのユニット要求が、いずれかの機能ブロックに割り当てられている
+        - [ ] 搭載寸法、取付方法、コネクタ位置について機械班と合意している (理由: 3/20 に合意予定)
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: 説明の要点
+      description: 設計の意図、前年度からの変更点、特に見てほしい点
+  - type: textarea
+    id: discussion
+    attributes:
+      label: 議論の記録 (実施後に記入)
+      description: 結論に至らなかった議論と、採否の判断理由。次年度が同じ議論を繰り返さないために残す
+  - type: textarea
+    id: result
+    attributes:
+      label: 判定 (実施後に主査が記入)
+      value: |
+        - 判定: 合格 / 条件付き合格 / 再審
+        - 条件 (条件付き合格の場合):
+        - 条件の確認者:
+        - 再審予定日 (再審の場合):
+        - 次フェーズの着手可否:
+  - type: textarea
+    id: followup
+    attributes:
+      label: 事後対応 (主査)
+      description: すべて済んだらこの Issue を close する
+      value: |
+        - [ ] 指摘を作業項目の Issue にし、この Issue のサブ Issue にした
+        - [ ] 対象文書の章の「承認」に、この Issue へのリンクを書いた (例: [DR2-TBC-20260315-01 (TUT-ProjectEV/tbc#60)](https://github.com/TUT-ProjectEV/tbc/issues/60))
+        - [ ] (条件付き合格の場合) 全ての 致命・重要 の指摘が完了したことを確認した
+        - [ ] (合格時) 審査した release/ ブランチの Pull request を main にマージし、main を develop にマージし戻した
+        - [ ] (合格時) 回次付きのタグを付けた (タグ: 例 EV26-DR2-1、EV26-DR4-SDC-PCB-MAIN-revB-1)

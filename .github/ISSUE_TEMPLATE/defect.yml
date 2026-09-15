@@ -1,0 +1,77 @@
+name: 不具合
+description: テストや走行で見つかった不具合、ヒヤリハット
+title: "[UNIT] "
+labels: ["type:defect"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        事故・ヒヤリハットは、原因の所在にかかわらず記録する。原因が判明したら、**原因があるフェーズ**の `phase:` ラベルを付ける。
+  - type: input
+    id: vehicle
+    attributes:
+      label: 対象車両
+      description: 車両コード。ID は車両ごとに採番するため、車両コードとセットで記録する
+      placeholder: "例: EV26"
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: 発生したテスト ID / 走行記録
+      placeholder: "例: IT-TBC-003 (テスト記録 #52)、EV26 走行記録 2026-05-10"
+    validations:
+      required: true
+  - type: input
+    id: target
+    attributes:
+      label: 対象 (基板リビジョン / ファームウェアのタグ / ハーネス)
+      placeholder: "例: SDC-PCB-MAIN-revB、EV26-FW-v1.2.0"
+    validations:
+      required: true
+  - type: textarea
+    id: symptom
+    attributes:
+      label: 現象
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 発生条件・再現手順
+      description: 再現性 (毎回 / ときどき / 1回のみ) も書く
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期待する動作・判定基準
+  - type: dropdown
+    id: severity
+    attributes:
+      label: 重大度
+      description: 対応する `severity:` ラベルを付ける
+      options:
+        - 致命 (安全・規則・車両成立に関わる)
+        - 重要 (手戻り・性能未達につながる)
+        - 軽微
+    validations:
+      required: true
+  - type: dropdown
+    id: safety
+    attributes:
+      label: 安全への影響
+      options:
+        - 関わらない
+        - TS・シャットダウン回路・BMS・IMD・BSPD・充電に関わる
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: ログ・波形・写真
+      description: リポジトリ内のパス、または共有ストレージのパス
+  - type: textarea
+    id: cause
+    attributes:
+      label: 推定原因と原因があるフェーズ (判明後に記入)

@@ -1,0 +1,144 @@
+name: 車検準備
+description: 自主車検と、大会の車検に向けた準備の確認 (system リポジトリで使う)
+title: "[INSPECTION] "
+labels: ["type:inspection"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **規則の項目は、この Issue ではなく車検シートで確認する。** 大会の車検は、大会が事前に公開する車検シートに沿って進められる。当年度の車検シートが公開されるまでは前年度大会の車検シートを使い、変更された規則を「規則の変更点の確認」で確認する。
+        - この Issue では、**当日と同じ流れで車検を受けられる状態か** (車検シート、書類、持ち込み品、手順、担当) を確認する
+        - 早い段階 (システムテスト中) から繰り返し作る。直前では直せない指摘が出る
+        - 記入済みの車検シートは `docs/records/<車両コード>/inspection/` に置く
+        - 車検の順序・合否基準・持ち込み品の規則上の要求は [大会規則](https://github.com/TUT-ProjectEV/.github-private/blob/main/regulations.md#6-車検) を参照
+  - type: input
+    id: vehicle
+    attributes:
+      label: 対象車両
+      description: 車両コード。ID は車両ごとに採番するため、車両コードとセットで記録する
+      placeholder: "例: EV26"
+    validations:
+      required: true
+  - type: input
+    id: event
+    attributes:
+      label: 大会
+      placeholder: "例: 2026 学生フォーミュラ日本大会"
+    validations:
+      required: true
+  - type: input
+    id: sheet
+    attributes:
+      label: 使用する車検シート
+      placeholder: "例: 2025 FSAEJ 車検シート (前年度版)"
+    validations:
+      required: true
+  - type: textarea
+    id: people
+    attributes:
+      label: 実施日・実施者・立会者
+      value: |
+        - 実施日:
+        - 実施者 (当該部位の設計者以外):
+        - 立会者 (ESO):
+    validations:
+      required: true
+  - type: textarea
+    id: sheet-check
+    attributes:
+      label: 車検シート
+      value: |
+        - [ ] 使用する車検シートを入手した (当年度版 / 前年度版)
+        - [ ] 前年度版を使う場合、当年度の規則・ローカルルールで変更された項目を洗い出し、「規則の変更点の確認」に書いた
+        - [ ] 当年度版が公開されたら、前年度版との差分を確認し直す予定を立てた
+        - [ ] 車検シートの電装系の各項目に、説明・実演する担当者を割り当てた
+        - [ ] 自主車検の結果を記入した車検シートを保存した
+  - type: textarea
+    id: documents
+    attributes:
+      label: 書類・資料
+      value: |
+        - [ ] 提出済みの ESF と部品データシートを、すぐに提示できる状態で用意した
+        - [ ] 提出済みの Rules Question とその回答を用意した
+        - [ ] 採用したローカルルールの緩和規定と、ESF での承認内容の一覧を用意した
+        - [ ] 電装系仕様書の構成図 (シャットダウン回路図を含む) が最新で、現車と一致している
+        - [ ] 現車と予備部品が ESF・SES の記載と一致している
+        - [ ] 基板の TS/GLV 間の距離を示す予備基板または写真を用意した
+        - [ ] 緩和規定の採用に必要な証拠 (締付トルクの記録、コート材の資料など) を用意した (該当する場合)
+        - [ ] 説明で使う資料 (シャットダウン回路の構成、IMD・BMS・BSPD の考え方、TS/GLV の分離) と説明担当が決まっている
+  - type: textarea
+    id: items
+    attributes:
+      label: 持ち込み品
+      description: 当年度の規則と車検シートで確認して行を更新する。初期値は Formula SAE Rules 2026 (IN.5.1、VE.2.4) の例
+      value: |
+        - [ ] 大会が公開した車検シート
+        - [ ] ハンドカート (デッドマン式ブレーキ付き、パックを確実に固定できる)
+        - [ ] 予備の Tractive Battery Pack・部品
+        - [ ] 充電器
+        - [ ] Tractive Battery Container の材料サンプル (該当する場合)
+        - [ ] 絶縁ケーブルシャー
+        - [ ] 絶縁ドライバ、絶縁工具
+        - [ ] 保護された測定端子付きマルチメータ
+        - [ ] フェイスシールド
+        - [ ] 試験日から12か月以内の HV 絶縁手袋 (車両同行分として2組以上)
+        - [ ] 0.83 m² 以上の HV 絶縁ブランケット ×2
+        - [ ] 作業する全員分の側面シールド付き保護メガネ
+        - [ ] BSPD 試験の治具、APPS / BSE の切り離し用のブレイクアウトボックス (使う場合)
+  - type: textarea
+    id: procedures
+    attributes:
+      label: 手順の確認
+      description: 車検で行う操作を、担当者が当日と同じ手順で行えるか。手順書がないものは作ってから練習する
+      value: |
+        | No | 手順 | 担当 | 手順書 | 練習日 | 確認 |
+        | --- | --- | --- | --- | --- | --- |
+        | 1 | 車両の移動 (MSD の取り外し、TSMS のロックアウト) |  |  |  |  |
+        | 2 | Tractive Battery Pack の取り外し・搬送・取り付け (ハンドカート) |  |  |  |  |
+        | 3 | Tractive Battery Container の開封と、Maintenance Plug による Module の分離 |  |  |  |  |
+        | 4 | GLV の起動 → Tractive System Active → Ready to Drive の操作 |  |  |  |  |
+        | 5 | シャットダウン回路の各要素の作動の実演と、BMS / IMD / BSPD 作動後のリセット |  |  |  |  |
+        | 6 | IMD 試験のための TSMP への接続 |  |  |  |  |
+        | 7 | 絶縁抵抗測定の準備 (測定点、TS の状態) |  |  |  |  |
+        | 8 | BSPD 試験 (治具の接続、電流または電圧信号の注入) |  |  |  |  |
+        | 9 | APPS / BSE の切り離しによる故障検知の実演 |  |  |  |  |
+        | 10 | 散水試験の準備 (駆動輪を浮かせる、防水の仮設物に頼らない) |  |  |  |  |
+        | 11 | ブレーキ試験での TS の遮断操作 |  |  |  |  |
+        | 12 | 充電の手順と、充電異常時の手順 |  |  |  |  |
+        | 13 | 車検後にファイアウォール等を外して充電し、元に戻す手順 (該当する場合) |  |  |  |  |
+        | 14 | Red Car Condition 発生時の対応と連絡 |  |  |  |  |
+  - type: textarea
+    id: rule-changes
+    attributes:
+      label: 規則の変更点の確認
+      description: 前年度の車検シートを使う場合に記入する。当年度版の公開後は、差分の確認結果も書く
+      value: |
+        | 規則 / ローカルルール | 条番号 | 変更内容 | 現車での確認結果 | Issue |
+        | --- | --- | --- | --- | --- |
+        |  |  |  | 適合 / 不適合 / 未確認 |  |
+  - type: textarea
+    id: result
+    attributes:
+      label: 自主車検の結果
+      value: |
+        - 電装系の確認項目数:
+        - 適合 / 不適合 / 未確認 の件数:
+        - 記入済み車検シートのファイル:
+  - type: textarea
+    id: findings
+    attributes:
+      label: 指摘事項
+      description: 対応が必要な指摘は、不具合または作業項目の Issue にして番号を書く
+  - type: dropdown
+    id: overall
+    attributes:
+      label: 総合判定
+      options:
+        - 準備完了
+        - 未完了
+    validations:
+      required: true
+  - type: textarea
+    id: remaining
+    attributes:
+      label: 未確認の項目と次回実施予定
